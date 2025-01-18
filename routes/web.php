@@ -41,3 +41,4 @@ Route::middleware('guest')->group(function () {
 
 Route::get('/posts', [PostController::class, 'show'])->name('posts');
 
+Route::get('/posts/{post_id}', [PostController::class, 'open_post'])->name('open_post');

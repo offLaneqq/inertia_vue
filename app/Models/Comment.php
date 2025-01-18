@@ -2,19 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Comment extends Model
 {
 
-    protected $table = 'posts';
+    protected $table = 'comments';
 
     protected $fillable = [
         'content',
-        'user_id'
+        'user_id',
+        'post_id'
     ];
-
 
     protected $hidden = [
         'visibility',
@@ -27,9 +26,10 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function comments()
+    public function post()
     {
-        return $this->hasMany(Comment::class, 'post_id');
+        return $this->belongsTo(Post::class);
     }
+
 
 }

@@ -10,10 +10,14 @@ use App\Models\User;
 class PostController extends Controller
 {
 
+    private function getUsers() {
+        return User::with('posts')->get();
+    }
+
     public function show(Request $request)
     {
 
-        $users = User::with('posts')->get();
+        $users = $this->getUsers();
 
         $isAuth = $request->user()->id ?? null;
 
@@ -38,5 +42,18 @@ class PostController extends Controller
         return redirect()->intended('posts');
     }
 
+    public function open_post(Request $request) {
+
+        $post_id = $request->post_id;
+
+        $post = Post::with('user', 'comments.user')->findOrFail($post_id);
+
+        return Inertia::render('Post', [
+            'post' => $post,
+            'user' => $post->user,
+            'comments' => $post->comments
+        ]);
+
+    }
 
 }

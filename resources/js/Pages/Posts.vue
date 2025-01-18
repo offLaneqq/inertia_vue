@@ -39,7 +39,11 @@ const submit = () => {
     <div class="wrapper">
         <div v-for="user in props.users" :key="user.id">
             <div class="card" v-for="post in user.posts.slice().reverse()">
-                <h3 class="card-author">{{ user.name }}</h3>
+                <h3 class="card-author">
+                    <a :href="route('open_post', {'post_id': post.id})">
+                        {{ user.name }}
+                    </a>
+                </h3>
                 <p class="content">{{ post.content }}</p>
             </div>
         </div>

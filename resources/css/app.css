@@ -72,7 +72,6 @@
     }
 }
 
-
 h1 {
     text-align: center;
     color: #4181ee;
@@ -141,7 +140,6 @@ h1 {
 }
 
 .write-post {
-
     margin-top: 2rem;
     width: 95%;
     justify-self: center;
@@ -154,8 +152,33 @@ h1 {
     button {
         margin-left: 1rem;
         padding: 2rem;
-        background-color:slateblue;
+        background-color: slateblue;
         border-radius: 15%;
         color: #fff;
     }
+}
+
+.comments-block {
+    margin: 1em 0 1.5em;
+    line-height: 1.6em;
+    font: normal 13px Cabin, sans-serif;
+
+    .comment-author {
+        margin: 0.5em 0;
+        font: normal 13px Cabin, sans-serif;
+    }
+
+    .comment-body {
+        margin: 0.25em 0 0;
+        font: normal 13px Cabin, sans-serif;
+    }
+
+    /* if future can be useful 
+    .comment-footer {
+        margin: -0.25em 0 2em;
+        line-height: 1.4em;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font: normal 13px Cabin, sans-serif;
+    } */
 }
