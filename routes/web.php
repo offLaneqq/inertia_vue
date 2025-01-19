@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
@@ -28,6 +29,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::post('/posts', [PostController::class, 'create'])->name('create');
+
+    Route::post('/posts/{post_id}', [CommentController::class, 'create'])->name('add_comment');
 });
 
 Route::middleware('guest')->group(function () {

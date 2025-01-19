@@ -14,7 +14,17 @@ class CommentController extends Controller
 //         return User::with('comments')->get();
 //     }
 
-//     public function show(Request $request) {
-//         dd($this->getUsers());
-//     }
+    public function create(Request $request) {
+        $request->validate([
+            'content' => 'required|string|max:200'
+        ]);
+
+        Comment::create([
+            'content' => $request->content,
+            'user_id' => $request->user()->id,
+            'post_id' => $request->post_id,
+        ]);
+
+        return redirect()->back();
+    }
 }

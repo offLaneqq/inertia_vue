@@ -1,4 +1,5 @@
 <script setup>
+import Comments from './Components/Comments.vue'
 
 const props = defineProps({
     user: null,
@@ -23,13 +24,9 @@ const props = defineProps({
         </div>
     </div>
 
-    <div class="comments-block" v-for="comment in comments">
-        <div class="comment-author" >
-            {{ comment.user.name }}
-        </div>
-        <div class="comment-body" > 
-            {{ comment.content }}
-        </div>
+    <div class="comments-block" >
+        <!-- <Comments :author="comment.user.name" :comment="comment.content" /> -->
+        <Comments :comments="comments" :post="post" />
     </div>
 
 </template>
