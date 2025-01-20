@@ -10,9 +10,6 @@ use App\Models\Comment;
 
 class CommentController extends Controller
 {
-//     private function getUsers() {
-//         return User::with('comments')->get();
-//     }
 
     public function create(Request $request) {
         $request->validate([
@@ -24,6 +21,7 @@ class CommentController extends Controller
             'user_id' => $request->user()->id,
             'post_id' => $request->post_id,
         ]);
+
 
         return redirect()->back();
     }

@@ -5,7 +5,8 @@ import { useForm } from '@inertiajs/vue3';
 
 const props = defineProps({
     comments: null,
-    post: null
+    post: null,
+    idAuth: null
 })
 
 const form = useForm({
@@ -55,7 +56,9 @@ const submit = (post) => {
             </form>
             
             <div v-for="comment in comments.slice().reverse()">
-                <CommentLayout :author="comment.user.name" :comment="comment.content" :date="comment.created_at" />
+                <CommentLayout :author="comment.user.name" :comment="comment" :date="comment.created_at"
+                    :idAuth="idAuth" :avatar="comment.user.avatar"
+                />
             </div>
 
 

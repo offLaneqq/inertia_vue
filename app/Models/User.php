@@ -57,4 +57,10 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class, 'user_id');
     }
 
+    // create link to user avatar
+    public function getAvatarAttribute($value)
+    {
+        return $value ? '/storage/' . $value : '/storage/avatars/default.jpg';
+    }
+
 }

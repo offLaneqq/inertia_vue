@@ -4,7 +4,8 @@ import Comments from './Components/Comments.vue'
 const props = defineProps({
     user: null,
     post: null,
-    comments: null
+    comments: null,
+    idAuth: null
 })
 
 </script>
@@ -26,7 +27,7 @@ const props = defineProps({
 
     <div class="comments-block" >
         <!-- <Comments :author="comment.user.name" :comment="comment.content" /> -->
-        <Comments :comments="comments" :post="post" />
+        <Comments :comments="comments" :post="post" :idAuth="idAuth" />
     </div>
 
 </template>

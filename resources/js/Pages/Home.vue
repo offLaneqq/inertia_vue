@@ -51,7 +51,7 @@ watch(search, debounce((q) => router.get('/', {search: q}, {preserveState: true}
             </thead>
             <tbody>
                 <tr v-for="user in users.data">
-                    <td><img :src="user.avatar ? ('storage/' + user.avatar) : 'storage/avatars/default.jpg'" alt=""
+                    <td><img :src="user.avatar" alt=""
                             class="avatar"></td>
                     <td>{{ user.name }}</td>
                     <td>{{ user.email }}</td>

@@ -46,12 +46,15 @@ class PostController extends Controller
 
         $post_id = $request->post_id;
 
+        $idAuth = $request->user()->id ?? null;
+
         $post = Post::with('user', 'comments.user')->findOrFail($post_id);
 
         return Inertia::render('Post', [
             'post' => $post,
             'user' => $post->user,
-            'comments' => $post->comments
+            'comments' => $post->comments,
+            'idAuth' => $idAuth
         ]);
 
     }

@@ -1,9 +1,14 @@
 <script setup>
 
+import { ref } from 'vue';
+import CommentSetting from './CommentSetting.vue';
+
 const props = defineProps({
     author: null,
     comment: null,
-    date: null
+    date: null,
+    idAuth: null,
+    avatar: null
 })
 
 // format data
@@ -13,6 +18,13 @@ const getDate = (date) =>
         month: "long",
         day: "numeric"
     })
+
+const dropdownOpen = ref({});
+
+const toggleDropdown = (commentId) => {
+    dropdownOpen.value[commentId] = !dropdownOpen.value[commentId];
+};
+
 
 </script>
 
@@ -24,14 +36,16 @@ const getDate = (date) =>
             <div class="flex items-center">
                 <p class="inline-flex items-center mr-3 text-sm text-gray-900 font-semibold">
                     <img class="mr-2 w-6 h-6 rounded-full"
-                        src="https://flowbite.com/docs/images/people/profile-picture-2.jpg">
-                        {{ author }}
+                        :src="avatar">
+                    {{ author }}
+                    
                 </p>
                 <p class="text-sm text-gray-600">
                     {{ getDate(date) }}
                 </p>
             </div>
-            <button id="dropdownComment1Button" data-dropdown-toggle="dropdownComment1"
+            <button @click="toggleDropdown(comment.id)" id="dropdownComment1Button"
+                data-dropdown-toggle="dropdownComment1"
                 class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 "
                 type="button">
                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -41,9 +55,21 @@ const getDate = (date) =>
                 </svg>
                 <span class="sr-only">Comment settings</span>
             </button>
-            <!-- Need add dropdown menu -->
         </footer>
-        <p class="text-gray-600 whitespace-pre-wrap text-pretty">{{ comment }}</p>
+        <!-- Need add dropdown menu -->
+        <div v-if="dropdownOpen[comment.id]"
+            class="relative flex float-right justify-center z-10 w-36 py-2 bg-white rounded-lg shadow dark:bg-gray-700">
+            
+            <div class="flex" v-if="idAuth === comment.user_id">
+                <CommentSetting text="Edit"  />
+                <CommentSetting text="Delete"  />
+            </div>
+            <div class="flex" v-else>
+                <CommentSetting text="Report" />
+            </div>
+
+        </div>
+        <p class="text-gray-600 whitespace-pre-wrap text-pretty">{{ comment.content }}</p>
         <div class="flex items-center mt-4 space-x-4">
             <button type="button"
                 class="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400 font-medium">
