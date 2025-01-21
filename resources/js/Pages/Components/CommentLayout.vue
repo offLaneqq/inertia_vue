@@ -8,7 +8,8 @@ const props = defineProps({
     comment: null,
     date: null,
     idAuth: null,
-    avatar: null
+    avatar: null,
+    post: null
 })
 
 // format data
@@ -58,11 +59,11 @@ const toggleDropdown = (commentId) => {
         </footer>
         <!-- Need add dropdown menu -->
         <div v-if="dropdownOpen[comment.id]"
-            class="relative flex float-right justify-center z-10 w-36 py-2 bg-white rounded-lg shadow dark:bg-gray-700">
+            class="relative flex float-right justify-center w-36 py-2 bg-white rounded-lg shadow dark:bg-gray-700">
             
-            <div class="flex" v-if="idAuth === comment.user_id">
-                <CommentSetting text="Edit"  />
-                <CommentSetting text="Delete"  />
+            <div class="flex" v-if="idAuth === comment.user_id" >
+                <CommentSetting text="Edit" :post="post" :commentId="comment.id" :comment="comment" />
+                <CommentSetting text="Delete" :post="post" />
             </div>
             <div class="flex" v-else>
                 <CommentSetting text="Report" />

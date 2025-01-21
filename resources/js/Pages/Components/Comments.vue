@@ -57,8 +57,7 @@ const submit = (post) => {
             
             <div v-for="comment in comments.slice().reverse()">
                 <CommentLayout :author="comment.user.name" :comment="comment" :date="comment.created_at"
-                    :idAuth="idAuth" :avatar="comment.user.avatar"
-                />
+                    :idAuth="idAuth" :avatar="comment.user.avatar" :post="post" />
             </div>
 
 

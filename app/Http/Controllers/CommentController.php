@@ -11,7 +11,8 @@ use App\Models\Comment;
 class CommentController extends Controller
 {
 
-    public function create(Request $request) {
+    public function create(Request $request)
+    {
         $request->validate([
             'content' => 'required|string|max:200'
         ]);
@@ -24,5 +25,27 @@ class CommentController extends Controller
 
 
         return redirect()->back();
+    }
+
+    public function update(Request $request, $post_id)
+    {
+
+        
+        $request->validate([
+            'content' => 'required|string|max:200',
+            'comment_id' => 'required|integer'
+        ]);
+
+        // dd($request->comment_id, $post_id);
+
+        $comment = Comment::where('post_id', $post_id)->findOrFail($request->comment_id);
+
+        if ($request->user()->can('update', $comment)) {
+            $comment->update([
+                'content' => $request->content
+            ]);
+        }
+
+        return redirect()->route('open_post', ['post_id' => $post_id]);
     }
 }

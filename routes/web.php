@@ -31,6 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/posts', [PostController::class, 'create'])->name('create');
 
     Route::post('/posts/{post_id}', [CommentController::class, 'create'])->name('add_comment');
+
+    Route::put('/posts/{post_id}', [CommentController::class, 'update'])->name('update_comment');
 });
 
 Route::middleware('guest')->group(function () {
