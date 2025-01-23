@@ -63,7 +63,7 @@ const toggleDropdown = (commentId) => {
             
             <div class="flex" v-if="idAuth === comment.user_id" >
                 <CommentSetting text="Edit" :post="post" :commentId="comment.id" :comment="comment" />
-                <CommentSetting text="Delete" :post="post" />
+                <CommentSetting text="Delete" :post="post" :commentId="comment.id" :comment="comment" />
             </div>
             <div class="flex" v-else>
                 <CommentSetting text="Report" />

@@ -14,6 +14,8 @@ const props = defineProps({
 
     <Head :title="$page.component" />
 
+     <p v-if="$page.props.flash.greet" class="p-4 bg-red-200">{{ $page.props.flash.greet }}</p>
+    
     <div class="wrapper">
         <div>
             <div class="card">
@@ -26,7 +28,6 @@ const props = defineProps({
     </div>
 
     <div class="comments-block" >
-        <!-- <Comments :author="comment.user.name" :comment="comment.content" /> -->
         <Comments :comments="comments" :post="post" :idAuth="idAuth" />
     </div>
 

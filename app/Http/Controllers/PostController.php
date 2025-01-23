@@ -54,7 +54,7 @@ class PostController extends Controller
             'post' => $post,
             'user' => $post->user,
             'comments' => $post->comments,
-            'idAuth' => $idAuth
+            'idAuth' => $idAuth,
         ]);
 
     }

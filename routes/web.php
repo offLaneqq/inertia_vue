@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/posts/{post_id}', [CommentController::class, 'create'])->name('add_comment');
 
     Route::put('/posts/{post_id}', [CommentController::class, 'update'])->name('update_comment');
+    Route::delete('/posts/{post_id}', [CommentController::class, 'destroy'])->name('delete_comment');
 });
 
 Route::middleware('guest')->group(function () {

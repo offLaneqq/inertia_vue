@@ -36,8 +36,6 @@ class CommentController extends Controller
             'comment_id' => 'required|integer'
         ]);
 
-        // dd($request->comment_id, $post_id);
-
         $comment = Comment::where('post_id', $post_id)->findOrFail($request->comment_id);
 
         if ($request->user()->can('update', $comment)) {
@@ -47,5 +45,20 @@ class CommentController extends Controller
         }
 
         return redirect()->route('open_post', ['post_id' => $post_id]);
+    }
+
+    public function destroy(Request $request, $post_id)
+    {
+        $request->validate([
+            'comment_id' => 'required|integer'
+        ]);
+
+        $comment = Comment::where('post_id', $post_id)->findOrFail($request->comment_id);
+
+        if ($request->user()->can('delete', $comment)) {
+            $comment->delete();
+        }
+
+        return redirect()->route('open_post', ['post_id' => $post_id])->with('greet', 'Comment was deleted.');
     }
 }
