@@ -14,15 +14,15 @@ class CommentController extends Controller
     public function create(Request $request)
     {
         $request->validate([
-            'content' => 'required|string|max:200'
+            'content' => 'required|string|max:200',
         ]);
 
         Comment::create([
             'content' => $request->content,
             'user_id' => $request->user()->id,
             'post_id' => $request->post_id,
+            'parent_id' => $request->parent_id,
         ]);
-
 
         return redirect()->back();
     }
@@ -30,7 +30,7 @@ class CommentController extends Controller
     public function update(Request $request, $post_id)
     {
 
-        
+
         $request->validate([
             'content' => 'required|string|max:200',
             'comment_id' => 'required|integer'

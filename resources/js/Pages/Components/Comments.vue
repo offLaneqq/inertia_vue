@@ -2,11 +2,15 @@
 
 import CommentLayout from './CommentLayout.vue'
 import { useForm } from '@inertiajs/vue3';
+import { usePage } from '@inertiajs/vue3';
+
+const page = usePage();
 
 const props = defineProps({
     comments: null,
     post: null,
-    idAuth: null
+    idAuth: null,
+    parent_comment: null
 })
 
 const form = useForm({
@@ -21,7 +25,7 @@ const inputKeyUp = (event, post) => {
 }
 
 const submit = (post) => {
-    form.post(route('add_comment', {'post_id': post.id}))
+    form.post(route('add_comment', { 'post_id': post.id }))
     form.reset('content')
 }
 
@@ -38,7 +42,7 @@ const submit = (post) => {
                     Comments ({{ comments.length }})
                 </h2>
             </div>
-            
+
             <form class="mb-6" @submit.prevent="submit(post)">
 
                 <div class="mb-4 bg-white rounded-lg rounded-t-lg border">
@@ -47,17 +51,23 @@ const submit = (post) => {
                         class="px-3 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none"
                         placeholder="Write a comment..." required></textarea>
                 </div>
-                
+
                 <button type="submit"
                     class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center bg-gray-300 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
                     Post comment
                 </button>
 
             </form>
-            
-            <div v-for="comment in comments.slice().reverse()">
+
+            <div v-for="comment in $page.props.parent_comments.slice().reverse()">
                 <CommentLayout :author="comment.user.name" :comment="comment" :date="comment.created_at"
                     :idAuth="idAuth" :avatar="comment.user.avatar" :post="post" />
+                <div v-for="reply in comment.replies">
+                    <div v-if="reply" class="ml-12">
+                        <CommentLayout :author="reply.user.name" :comment="reply" :date="reply.created_at"
+                    :idAuth="idAuth" :avatar="reply.user.avatar" :post="post" />
+                    </div>
+                </div>
             </div>
 
 

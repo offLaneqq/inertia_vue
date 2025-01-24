@@ -36,10 +36,9 @@ const toggleDropdown = (commentId) => {
         <footer class="flex justify-between items-center mb-2">
             <div class="flex items-center">
                 <p class="inline-flex items-center mr-3 text-sm text-gray-900 font-semibold">
-                    <img class="mr-2 w-6 h-6 rounded-full"
-                        :src="avatar">
+                    <img class="mr-2 w-6 h-6 rounded-full" :src="avatar">
                     {{ author }}
-                    
+
                 </p>
                 <p class="text-sm text-gray-600">
                     {{ getDate(date) }}
@@ -60,8 +59,8 @@ const toggleDropdown = (commentId) => {
         <!-- Need add dropdown menu -->
         <div v-if="dropdownOpen[comment.id]"
             class="relative flex float-right justify-center w-36 py-2 bg-white rounded-lg shadow dark:bg-gray-700">
-            
-            <div class="flex" v-if="idAuth === comment.user_id" >
+
+            <div class="flex" v-if="idAuth === comment.user_id">
                 <CommentSetting text="Edit" :post="post" :commentId="comment.id" :comment="comment" />
                 <CommentSetting text="Delete" :post="post" :commentId="comment.id" :comment="comment" />
             </div>
