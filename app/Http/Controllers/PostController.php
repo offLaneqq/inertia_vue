@@ -56,12 +56,18 @@ class PostController extends Controller
         ->with('replies.user', 'user') // Завантажуємо відповіді з авторами
         ->get();
 
+        $child_comments = Comment::where('post_id', $post_id)
+        ->whereNotNull('parent_id') // Тільки дочірні коментарі
+        ->with('parent.user')
+        ->get();
+
         return Inertia::render('Post', [
             'post' => $post,
             'user' => $post->user,
             'comments' => $post->comments,
             'idAuth' => $idAuth,
             'parent_comments' => $parent_comments,
+            'child_comments' => $child_comments,
         ]);
 
     }
